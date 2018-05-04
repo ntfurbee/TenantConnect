@@ -6,18 +6,22 @@
 //  Copyright © 2018 Robert Miller. All rights reserved.
 //
 import Foundation
-class StudentModel {
+class TenantModel {
     var username: String
     var email: String
     var password: String
-    var instructors = [InstructorModel]()
-    var sections = [SectionModel]()
+    var address: String
+    var landlord: LandlordModel?
+    var workOrder = [WorkOrderModel]()
     var loggedIn = false
+    var utilityReport: UtilityReportModel?
+    var lease: String?
     
-    init(username: String, email: String, password: String) {
+    init(username: String, email: String, password: String, address: String) {
         self.username = username
         self.password = password
         self.email = email
+        self.address = address
     }
     
     func getUsername() -> String {
@@ -28,13 +32,20 @@ class StudentModel {
         return password
     }
     
-    func getInstructors() -> Array<InstructorModel> {
-        return instructors
+    func getLandlord() -> LandlordModel {
+        if(landlord != nil){
+            return landlord!
+        }
+        else {
+            let placeholder = LandlordModel(username: "nil", email: "nil", password: "nil")
+            return placeholder
+        }
     }
-    
-    func getSections() -> Array<SectionModel> {
-        return sections
-    }
+    /* Look into maybe a getWorkOrder function
+     func getSections() -> Array<SectionModel> {
+     return sections
+     }
+     */
     
     func getEmail() -> String {
         return email
@@ -48,14 +59,6 @@ class StudentModel {
         password = pass
     }
     
-    func addInstructor(instructor: InstructorModel) {
-        instructors.append(instructor)
-    }
-    
-    func addSection(section: SectionModel) {
-        sections.append(section)
-    }
-    
     func login() {
         loggedIn = true
     }
@@ -64,3 +67,4 @@ class StudentModel {
         loggedIn = false
     }
 }
+

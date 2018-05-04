@@ -29,10 +29,24 @@ class InstructorAddClassViewController: UIViewController {
     }
     
     @IBAction func submitClass(_ sender: Any) {
+        /*
         guard let section_id = addClassField?.text else { return }
         let section = SectionModel(instructor: ((mainInstance.currentInstructor?.getUsername())!), total: 0, section_id: section_id, active: false)
         mainInstance.currentInstructor?.addSection(section: section)
         mainInstance.sections.append(section)
+ */
+        guard let tenantUsername = addClassField?.text else { return }
+        var found = false
+        for i in mainInstance.tenants{
+            if (i.getUsername() == tenantUsername){
+                print("Found tenant username")
+                found = true
+                mainInstance.currentLandlord?.tenants.append(i)
+            }
+        }
+        if(!found){
+            print("error: tenant not found.")
+        }
         self.performSegue(withIdentifier: "backToInstructorHome", sender: self)
         
     }

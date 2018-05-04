@@ -11,7 +11,7 @@ import Firebase
 
 var alert: UIAlertController!
 
-class InstructorHomeViewController: UIViewController, UIPickerViewDelegate {
+class InstructorHomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var pickerView: UIPickerView!
     
     override func viewDidLoad() {
@@ -20,11 +20,12 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDelegate {
                     pickerView.isHidden = false
         }
 
-        //pickerView.delegate = self
-        //pickerView.dataSource = self
-        //pickerView.reloadAllComponents()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.reloadAllComponents()
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "app-background-images.png")!)
+        pickerView.reloadAllComponents()
         // Do any additional setup after loading the view.
     }
 
@@ -34,9 +35,6 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDelegate {
     }
     
     @IBAction func handleLogout(_ sender: Any) {
-        try! Auth.auth().signOut()
-        mainInstance.currentInstructor?.loggedIn = false
-        mainInstance.currentInstructor = nil
         self.performSegue(withIdentifier: "backToHomeScreen", sender: self)
     }
     
@@ -67,21 +65,21 @@ class InstructorHomeViewController: UIViewController, UIPickerViewDelegate {
         return 1
     }
     
-    /*
+    
     // returns the # of rows in each component..
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return (mainInstance.currentInstructor?.sections.count)!
+        return (mainInstance.currentLandlord?.tenants.count)!
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return mainInstance.currentInstructor?.sections[row].section_id
+        return mainInstance.currentLandlord?.tenants[row].address
     }
     
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
     }
-    */
+    
     func sendAlert(_ sender: Any, message: String){
         let alert = UIAlertController(title: "Success!", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in

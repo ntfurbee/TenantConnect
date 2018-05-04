@@ -36,7 +36,7 @@ class SignUpViewController: UIViewController {
                 print("User created!")
                 
                 //Auth.auth().currentUser.
-                
+                /*
                 if email.range(of:"mail") != nil {
                     let professor = InstructorModel(username: username, email: email, password: pass, attStatus: false, radius: 100)
                     mainInstance.instructors.append(professor)
@@ -49,7 +49,36 @@ class SignUpViewController: UIViewController {
                     print("Successfully created tenant with the following attributes: \n")
                     dump(mainInstance.students)
                 }
+                */
                 
+                if(username == "landlordTest8"){
+                    let landlordTest = LandlordModel(username: username, email: email, password: pass)
+                    mainInstance.currentLandlord = landlordTest
+                    mainInstance.landlords.append(landlordTest)
+                    
+                    let landlord2 = LandlordModel(username: "landlord2", email: "landlord2@yahoo.com", password: "password")
+                    mainInstance.landlords.append(landlord2)
+                    
+                    let landlord3 = LandlordModel(username: "landlord3", email: "landlord3@aol.com",password: "password")
+                    mainInstance.landlords.append(landlord3)
+                    
+                    let landlord4 = LandlordModel(username: "landlord4", email: "landlord4@email.org", password: "password")
+                    mainInstance.landlords.append(landlord4)
+                    
+                    let tenant2 = TenantModel(username: "tenant2", email: "tenant2@gmail.com", password: "password", address: "111 University ave")
+                    mainInstance.tenants.append(tenant2)
+                    
+                    let tenant3 = TenantModel(username: "tenant3", email: "tenant3@aol.com", password: "password", address: "21 jump st")
+                    mainInstance.tenants.append(tenant3)
+                    
+                    let tenant4 = TenantModel(username: "tenant4", email: "tenant4@gmail.com", password: "password", address: "90 high st")
+                    mainInstance.tenants.append(tenant4)
+                }
+                else if(username == "tenantTest7"){
+                    let tenantTest = TenantModel(username: username, email: email, password: "password", address: "55 Beechurst ave")
+                    mainInstance.currentTenant = tenantTest
+                    mainInstance.tenants.append(tenantTest)
+                }
                 
                 let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
                 changeRequest?.displayName = username

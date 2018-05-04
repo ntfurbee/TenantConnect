@@ -15,7 +15,6 @@ class StudentHomeViewController: UIViewController, UIPickerViewDelegate  {
     
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var attendanceButton: UIButton!
-    let sections = mainInstance.currentStudent?.getSections()
     
     
         
@@ -24,7 +23,7 @@ class StudentHomeViewController: UIViewController, UIPickerViewDelegate  {
     override func viewDidLoad() {
         //pickerView.isHidden = false
         //pickerView.delegate = self
-        //pickerView.dataSource = self
+       // pickerView.dataSource = self
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "app-background-images.png")!)
         
@@ -32,8 +31,6 @@ class StudentHomeViewController: UIViewController, UIPickerViewDelegate  {
     
     @IBAction func handleLogout(_ sender: Any) {
         try! Auth.auth().signOut()
-        mainInstance.currentStudent?.loggedIn = false
-        mainInstance.currentStudent = nil
         self.performSegue(withIdentifier: "backToHomeScreen", sender: self)
     }
     
@@ -48,6 +45,10 @@ class StudentHomeViewController: UIViewController, UIPickerViewDelegate  {
     @IBAction func tenantUtility(_ sender: Any){
         self.performSegue(withIdentifier: "toTenantUtility", sender: self)
         
+    }
+    
+    @IBAction func submitWorkOrder(_ sender: UIButton){
+        self.performSegue(withIdentifier: "toWorkOrder", sender: self)
     }
     
 
@@ -70,6 +71,7 @@ class StudentHomeViewController: UIViewController, UIPickerViewDelegate  {
 
     }
  */
+ 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

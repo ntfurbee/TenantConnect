@@ -27,6 +27,7 @@ class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     @IBAction func addClass(_ sender: Any){
+        /*
         let student = mainInstance.currentStudent
         for i in mainInstance.sections {
             if(i.section_id == section_id){
@@ -35,9 +36,11 @@ class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPicker
 
             }
         }
+ */
+        mainInstance.currentTenant?.landlord = mainInstance.currentLandlord
         self.performSegue(withIdentifier: "toStudentHomeView", sender: self)
 
-
+        
     }
     
     func sendAlert(_ sender: Any, alert: String, message: String){
@@ -72,16 +75,18 @@ class AddClassViewController: UIViewController, UIPickerViewDataSource, UIPicker
     }
     
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return mainInstance.sections.count
+        //return mainInstance.sections.count
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return mainInstance.sections[row].section_id
+        //return mainInstance.sections[row].section_id
+        return mainInstance.currentLandlord?.getUsername()
     }
     
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        section_id = mainInstance.sections[row].section_id
+       // section_id = mainInstance.sections[row].section_id
     }
 
 }

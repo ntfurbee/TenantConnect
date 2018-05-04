@@ -7,19 +7,17 @@
 //
 
 import Foundation
-class InstructorModel{
+class LandlordModel{
     var username: String
     var email: String
-    var sections = [SectionModel]()
-    var attStatus: Bool
-    var radius: Int
+    var tenants = [TenantModel]()
     var loggedIn = false
     var password: String
+    var workOrders = [WorkOrderModel]()
+    var utilityReports = [UtilityReportModel]()
     
-    init(username: String, email: String, password: String, attStatus: Bool, radius: Int){
+    init(username: String, email: String, password: String){
         self.username = username
-        self.attStatus = attStatus
-        self.radius = radius
         self.password = password
         self.email = email
     }
@@ -28,32 +26,24 @@ class InstructorModel{
         return username
     }
     
-    func getAttStatus() -> Bool {
-        return attStatus
-    }
-    
-    func getRadius() -> Int {
-        return radius
-    }
-    
-    func getSectionIDs() -> Array<SectionModel> {
-        return sections
+    func getTenants() -> Array<TenantModel> {
+        return tenants
     }
     
     func setUsername(user: String) {
         username = user
     }
     
-    func setAttStatus(status: Bool) {
-        attStatus = status
-    }
-    
-    func addSection(section: SectionModel) {
-        sections.append(section)
-    }
-    
-    func removeSection(id: String){
-        
+    func removeWorkOrder(id: String) -> Bool{
+        var count = 0
+        for i in workOrders{
+            if i.workOrderID == id{
+                workOrders.remove(at:count)
+                return true
+            }
+            count = count + 1
+        }
+        return false
     }
     
     func getEmail() -> String {
@@ -67,5 +57,6 @@ class InstructorModel{
     func logout() {
         loggedIn = false
     }
-
+    
 }
+
